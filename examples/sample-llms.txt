@@ -1,0 +1,18 @@
+# Example llms.txt
+
+[site]
+name = Example Site
+url = https://example.com
+summary = Example site used to demonstrate the expected shape of a machine-readable LLM guidance file.
+
+[pages]
+- https://example.com/
+- https://example.com/about
+- https://example.com/docs
+- https://example.com/contact
+
+[guidance]
+preferred_summary_style = concise
+citation_preference = link-to-source
+content_scope = public-pages-only
+sensitive_content = none

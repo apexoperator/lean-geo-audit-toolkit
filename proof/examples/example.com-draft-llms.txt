@@ -1,0 +1,18 @@
+# Draft llms.txt
+
+[site]
+name = example.com
+url = https://example.com
+summary = Replace this with a concise description of the site and its public content.
+
+[pages]
+- https://example.com/
+- https://example.com/about
+- https://example.com/docs
+- https://example.com/contact
+
+[guidance]
+preferred_summary_style = concise
+citation_preference = link-to-source
+content_scope = public-pages-only
+sensitive_content = none

@@ -1,0 +1,10 @@
+# Generated audit outputs
+outputs/*
+!outputs/.gitkeep
+
+# Curated proof artifacts are intentionally tracked in proof/
+# Keep proof/ committed; keep outputs/ disposable.
+
+# Python cache
+__pycache__/
+*.pyc
