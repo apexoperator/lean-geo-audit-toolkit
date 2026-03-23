@@ -1,52 +1,77 @@
-Lean GEO Audit Toolkit
-A small, report-first toolkit for evaluating AI-search visibility, citability, crawler access, llms.txt readiness, and basic technical discoverability signals.
+# Lean GEO Audit Toolkit
 
-This repo is intentionally narrow:
+A small, report-first toolkit for evaluating AI-search visibility, citability, crawler access, `llms.txt` readiness, and core technical discoverability signals.
 
-lightweight fetch + page discovery
-robots.txt / sitemap review
-llms.txt detection and draft generation
-citability scoring
-schema / entity-direction checks
-markdown report generation
-repeatable validation runs
-honest fetch-limited reporting when lightweight acquisition fails
-Who this is for
-This is for operators, consultants, founders, and technical generalists who want a practical first-pass GEO / AI-search audit without adopting a bloated SEO platform or an agency-in-a-box repo.
+---
 
-What it does
+## Overview
+
+This repo is intentionally narrow. It covers:
+
+- Lightweight fetch and page discovery
+- `robots.txt` and sitemap review
+- `llms.txt` detection and draft generation
+- Citability scoring
+- Schema and entity-direction checks
+- Markdown report generation
+- Repeatable validation runs
+- Honest fetch-limited reporting when lightweight acquisition fails
+
+---
+
+## Who this is for
+
+Operators, consultants, founders, and technical generalists who want a practical first-pass GEO / AI-search audit — without adopting a bloated SEO platform or an agency-in-a-box repo.
+
+---
+
+## What it does
+
 Given a target site, the toolkit:
 
-fetches a homepage and selected internal pages
-inspects metadata, headings, canonicals, and internal-linking basics
-reviews robots.txt and sitemap discovery
-assesses citability / answer quality
-detects llms.txt and drafts one when missing
-checks schema / technical visibility signals
-produces one clean markdown report with prioritized next actions
-Why this exists
-The GEO / AI-search audit idea is useful, but many implementations are too installer-heavy, too environment-specific, too broad, or too sloppy to trust.
+1. Fetches the homepage and selected internal pages
+2. Inspects metadata, headings, canonicals, and internal-linking basics
+3. Reviews `robots.txt` and sitemap discovery
+4. Assesses citability and answer quality
+5. Detects `llms.txt` and drafts one when missing
+6. Checks schema and technical visibility signals
+7. Produces one clean markdown report with prioritized next actions
 
-This project keeps the useful core and removes the surrounding sprawl.
+---
 
-Runtime posture
-Language: Python 3
-Recommended version: Python 3.11+
-Dependencies: standard library only
-Execution model: local scripts with explicit output paths and no hidden service state
+## Why this exists
+
+The GEO / AI-search audit idea is useful, but many implementations are too installer-heavy, too environment-specific, too broad, or too sloppy to trust. This project keeps the useful core and removes the surrounding sprawl.
+
+---
+
+## Runtime posture
+
+| Property | Value |
+|---|---|
+| Language | Python 3 |
+| Recommended version | Python 3.11+ |
+| Dependencies | Standard library only |
+| Execution model | Local scripts, explicit output paths, no hidden service state |
+
 That posture is intentional. The goal is to stay small, auditable, and easy to reason about.
 
-Quickstart
-Run a single audit:
+---
 
+## Quickstart
+
+**Run a single audit:**
+```bash
 python3 scripts/run_audit.py https://example.com --output-dir outputs/test-run
+```
 
-Run the validation set:
-
+**Run the validation set:**
+```bash
 python3 scripts/run_validation.py
+```
 
-Primary outputs from a normal run:
-
+**Primary outputs from a normal run:**
+```
 site-fetch.json
 crawler-audit.json
 llmstxt-audit.json
@@ -54,90 +79,119 @@ citability-audit.json
 schema-audit.json
 draft-llms.txt
 report.md
-If lightweight fetch fails or is blocked, the tool writes a fetch-limited report instead of pretending the site itself is poor.
+```
 
-Proof that it is real
-This is not just a concept stub. The repo already includes:
+If lightweight fetch fails or is blocked, the tool writes a fetch-limited report rather than misattributing the limitation as a site weakness.
 
-an end-to-end audit flow that produces JSON artifacts, a markdown report, and a draft llms.txt
-tracked proof artifacts in proof/
-a standard-library-only runtime posture
-a small real-site validation pass showing both usable results and honest fetch limits
-explicit methodology, scoring, and caveat documentation
-Public-facing proof artifacts live in proof/:
+---
 
+## Proof that it is real
+
+This is not a concept stub. The repo includes:
+
+- An end-to-end audit flow producing JSON artifacts, a markdown report, and a draft `llms.txt`
+- Tracked proof artifacts in `proof/`
+- Standard-library-only runtime posture
+- A real-site validation pass showing both usable results and honest fetch limits
+- Explicit methodology, scoring, and caveat documentation
+
+**Public-facing proof artifacts live in `proof/`:**
+```
 proof/examples/example.com-report.md
 proof/examples/example.com-draft-llms.txt
 proof/validation/validation-summary.md
-Disposable local runs stay in outputs/ and are ignored by git.
+```
 
-Validation snapshot
-Current lightweight validation examples include:
+Disposable local runs stay in `outputs/` and are excluded by `.gitignore`.
 
-https://stripe.com → 66/100
-https://developer.mozilla.org → 58/100
-https://www.shopify.com → 80/100
-https://www.notion.so → 70/100
-https://openai.com → fetch-limited / incomplete (HTTP 403 in lightweight mode)
-That mix is useful on purpose. The goal is not flattering scores; it is believable first-pass diagnostics.
+---
 
-What v1 is not
+## Validation snapshot
+
+| Site | Score / Status |
+|---|---|
+| https://stripe.com | 66 / 100 |
+| https://developer.mozilla.org | 58 / 100 |
+| https://www.shopify.com | 80 / 100 |
+| https://www.notion.so | 70 / 100 |
+| https://openai.com | Fetch-limited / incomplete (HTTP 403 in lightweight mode) |
+
+That mix is intentional. The goal is not flattering scores — it is believable first-pass diagnostics.
+
+---
+
+## What v1 is not
+
 Explicit non-goals for this version:
 
-CRM
-proposal generation
-dashboard app
-Flask web UI
-browser automation by default
-PDF export
-giant installer scripts
-hidden persistent state
-pretending lightweight signals are perfect truth
-Repo structure
-README.md — overview, runtime posture, quickstart, and limitations
-LICENSE — repo license
-PROJECT-BRIEF.md — product brief
-POSITIONING.md — product framing
-references/scoring.md — scoring model
-references/methodology.md — audit method and assumptions
-references/validation-notes.md — what validation exposed
-proof/ — curated public-facing proof artifacts
-examples/ — lightweight example material and format references
-scripts/ — focused utilities
-GITHUB-READINESS.md — minimum publish checklist
-MONETIZATION.md — first productized-service path
-outputs/ — local generated runs
-Product direction
+- CRM
+- Proposal generation
+- Dashboard app or Flask web UI
+- Browser automation (by default)
+- PDF export
+- Giant installer scripts
+- Hidden persistent state
+- Treating lightweight signals as perfect truth
+
+---
+
+## Repo structure
+```
+README.md               — Overview, runtime posture, quickstart, and limitations
+LICENSE                 — Repo license
+PROJECT-BRIEF.md        — Product brief
+POSITIONING.md          — Product framing
+references/
+  scoring.md            — Scoring model
+  methodology.md        — Audit method and assumptions
+  validation-notes.md   — What validation exposed
+proof/                  — Curated public-facing proof artifacts
+examples/               — Lightweight example material and format references
+scripts/                — Focused utilities
+GITHUB-READINESS.md     — Minimum publish checklist
+MONETIZATION.md         — First productized-service path
+outputs/                — Local generated runs (git-ignored)
+```
+
+---
+
+## Product direction
+
 Current direction is hybrid-lightweight:
 
-script/report flow first
-optional OpenClaw wrapper later if it earns it
-markdown report is the primary artifact
+- Script/report flow first
+- Optional richer crawler wrapper later, if it earns it
+- Markdown report is the primary artifact
+
 The strongest immediate use is not SaaS. It is a practical GEO baseline audit workflow and a credible proof asset.
 
-Limitations
+---
+
+## Limitations
+
 This is intentionally a narrow first version.
 
-Current fetch mode is lightweight and non-browser. That keeps the tool simple and auditable, but it also means some JS-heavy or bot-protected sites may return incomplete, noisy, or blocked HTML.
+Current fetch mode is lightweight and non-browser. That keeps the tool simple and auditable, but it means JS-heavy or bot-protected sites may return incomplete, noisy, or blocked HTML.
 
-When that happens, the tool should fail honestly:
+When that happens, the tool fails honestly: it writes a fetch-limited report, does not treat blocked acquisition as evidence the site is weak, and surfaces the limitation as a real caveat.
 
-it writes a fetch-limited report
-it does not treat blocked acquisition as proof the site is weak
-it surfaces the limitation as a real caveat
-This toolkit does not:
+**This toolkit does not:**
 
-predict rankings
-replace a browser-based technical audit
-fully model all AI systems
-replace strategic content work
-replace a full SEO or GEO platform
-Standard for publishability
+- Predict rankings
+- Replace a browser-based technical audit
+- Fully model all AI systems
+- Replace strategic content work
+- Replace a full SEO or GEO platform
+
+---
+
+## Standard for publishability
+
 This repo is only worth keeping public if it stays:
 
-genuinely useful
-easy to explain
-easy to audit
-modest in scope
-honest about limits
-good enough to point clients or peers at without apology
+- Genuinely useful
+- Easy to explain
+- Easy to audit
+- Modest in scope
+- Honest about its limits
+- Good enough to point clients or peers at without apology
